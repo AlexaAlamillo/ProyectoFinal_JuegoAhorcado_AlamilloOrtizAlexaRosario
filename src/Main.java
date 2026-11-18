@@ -11,6 +11,10 @@ class JuegoAhorcado{
 		
 	}
 }
+
+class PruebaJuegoAhorcado{
+	
+}
 public class Main {
 
 	public static void main(String[] args) {
