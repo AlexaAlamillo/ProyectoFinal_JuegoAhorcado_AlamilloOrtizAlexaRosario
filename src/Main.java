@@ -1,5 +1,7 @@
 class JuegoAhorcado{
-	
+	public []String cargarPalabras (String cadena ){
+		
+	}
 }
 public class Main {
 
