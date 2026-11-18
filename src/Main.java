@@ -6,6 +6,10 @@ class JuegoAhorcado{
 	public void elegirPalabras (String [] palabras) {
 		
 	}
+	
+	public void inicioAhorcado() {
+		
+	}
 }
 public class Main {
 
