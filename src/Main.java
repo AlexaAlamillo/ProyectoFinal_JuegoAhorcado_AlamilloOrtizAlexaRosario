@@ -13,7 +13,9 @@ class JuegoAhorcado{
 }
 
 class PruebaJuegoAhorcado{
-	
+	public void menuOpciones() {
+		
+	}
 }
 public class Main {
 
