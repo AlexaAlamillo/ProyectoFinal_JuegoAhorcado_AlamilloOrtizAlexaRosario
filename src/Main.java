@@ -1,5 +1,9 @@
 class JuegoAhorcado{
-	public []String cargarPalabras (String cadena ){
+	public String [] cargarPalabras (String cadena ){
+		return null;
+	}
+	
+	public void elegirPalabras (String [] palabras) {
 		
 	}
 }
