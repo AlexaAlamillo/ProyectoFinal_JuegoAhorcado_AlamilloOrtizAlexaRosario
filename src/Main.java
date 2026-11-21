@@ -18,6 +18,34 @@ class AlmacenamientoPila{
 	            datos[tope] = letra;// y en la posicion donde este tope, se guardara la letra ingresada 
 	        }
 	    }
+	    
+	    public char Eliminarletra() {
+	    	if(!verificarPilaVacia()) {
+	    		 char letra = datos[tope];
+	             tope--;
+	             return letra;
+	    	}
+			return '\0'; //\0 se utiliza para devolver un null pero en caracter
+	    	
+	    }
+	    
+	    //metodo para verificar si la pila esta vacia
+	    public boolean verificarPilaVacia() {
+	    	 return tope == -1;
+	    }
+	    
+	    //metodo para buscar una letra dentro de la pila
+	    public boolean BuscarLetra (char letra) {
+
+	        for (int i = 0; i <= tope; i++) {
+
+	            if (datos[i] == letra) {
+	                return true;
+	            }
+	        }
+
+	        return false;
+	    }
 	
 }
 //====================CLASE JUEGO AHORCADO=================
