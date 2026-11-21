@@ -37,6 +37,7 @@ class AlmacenamientoPila{
 	    //metodo para buscar una letra dentro de la pila
 	    public boolean BuscarLetra (char letra) {
 
+	    	
 	        for (int i = 0; i <= tope; i++) {
 
 	            if (datos[i] == letra) {
