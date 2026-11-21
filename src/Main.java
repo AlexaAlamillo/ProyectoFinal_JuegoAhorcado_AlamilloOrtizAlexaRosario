@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 //============Clase almacenamientoPila==============
 class AlmacenamientoPila{
@@ -59,16 +60,66 @@ class AlmacenamientoPila{
 
 	        return letras;
 	    }
+	    //Cantidad de letras 
+	    public int cantidad() {
+	        return tope + 1;
+	    }
 	
 }
 //====================CLASE JUEGO AHORCADO=================
 class JuegoAhorcado{
+	 private String palabraSecreta;
+	 private AlmacenamientoPila letrasIngresadas;
+	 private Oportunidades oportunidades;
+	   
+	 public JuegoAhorcado() {
+
+	        letrasIngresadas = new AlmacenamientoPila();
+	        oportunidades = new Oportunidades();
+	 }
+	 
 	public String [] cargarPalabras (String cadena ){
 		return null;
 	}
 	
-	public void elegirPalabras (String [] palabras) {
+	public String elegirPalabras (String [] palabras) {//En este metodo escogemos de manera aleatoria 
+		if (palabras.length == 0) {//una palabra , con un objeto del tipo random
+            return null;
+        }
+
+        Random random = new Random();
+
+        int posicion = random.nextInt(palabras.length);
+
+        return palabras[posicion];
 		
+	}
+	
+	public String obtenerPalabraEncontrada(String palabraSecreta, char[] letrasIngresadas) {
+
+        String resultado = "";
+
+        for (int i = 0; i < palabraSecreta.length(); i++) {
+
+            char letra = palabraSecreta.charAt(i);
+
+            boolean encontrada = false;
+
+            for (int j = 0; j < letrasIngresadas.length; j++) {
+
+                if (letrasIngresadas[j] == letra) {
+                    encontrada = true;
+                }
+            }
+
+            if (encontrada) {
+                resultado += letra + " ";
+            } else {
+                resultado += "_ ";
+            }
+        }
+
+        return resultado;
 	}
 	
 	public void inicioAhorcado() {
@@ -125,7 +176,7 @@ class PruebaJuegoAhorcado{
 
 
 //=========CLASE OPORTUNIDADES==========
-class oportunidades{
+class Oportunidades{
 	private byte intentos = 8;
 	
     public void descontarIntento() {
