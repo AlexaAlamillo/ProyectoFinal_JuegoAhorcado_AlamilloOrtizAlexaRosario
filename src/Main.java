@@ -3,6 +3,7 @@ import java.util.Scanner;
 class AlmacenamientoPila{
 	 private char[] datos;
 	    private int tope;
+	    
 	
 }
 //====================CLASE JUEGO AHORCADO=================
