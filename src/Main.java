@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+
+//====================CLASE JUEGO AHORCADO=================
 class JuegoAhorcado{
 	public String [] cargarPalabras (String cadena ){
 		return null;
@@ -14,6 +16,8 @@ class JuegoAhorcado{
 	}
 }
 
+
+//=================CLASE PRUEBA JUEGO AHORCADO==========
 class PruebaJuegoAhorcado{
 	public void menuOpciones() {
 		Scanner sc = new Scanner (System.in);
@@ -22,7 +26,7 @@ class PruebaJuegoAhorcado{
 		do {
 			
 			System.out.println("======MENU DEL JUEGO====");
-			System.out.println("1) Verificar archivo");
+			System.out.println("1) Verificar Archivo");
 			System.out.println("2) Llenar Archivo con Palabras");
 			System.out.println("3) Borrar Archivo");
 			System.out.println("4) Jugar");
@@ -58,7 +62,21 @@ class PruebaJuegoAhorcado{
 	
 	}
 }
+
+
+//=========CLASE OPORTUNIDADES==========
 class oportunidades{
+	private byte intentos = 8;
+	
+    public void descontarIntento() {
+
+        intentos--;
+    }
+
+    public byte getIntentos() {
+
+        return intentos;
+    }
 	
 }
 	
