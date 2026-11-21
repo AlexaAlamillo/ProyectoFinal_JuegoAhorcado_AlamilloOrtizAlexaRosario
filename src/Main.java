@@ -47,6 +47,18 @@ class AlmacenamientoPila{
 
 	        return false;
 	    }
+	    
+	    //metodo para regresar las letras ingresadas 
+	    public char[] obtenerLetras() {
+
+	        char[] letras = new char[tope + 1];
+
+	        for (int i = 0; i <= tope; i++) {
+	            letras[i] = datos[i];
+	        }
+
+	        return letras;
+	    }
 	
 }
 //====================CLASE JUEGO AHORCADO=================
