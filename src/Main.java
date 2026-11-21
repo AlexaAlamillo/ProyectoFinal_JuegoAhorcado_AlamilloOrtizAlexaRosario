@@ -4,6 +4,20 @@ class AlmacenamientoPila{
 	 private char[] datos;
 	    private int tope;
 	    
+	    //Crear la pila 
+	    public AlmacenamientoPila() {
+	    	datos=new char[27];// Se inicializa en 27 por que , ahi guardaremos las letras del alfabeto
+	    	tope = -1;
+	    	
+	    }
+	    //Agregar elemento a la pila 
+	    public void agregarLetra(char letra) {
+
+	        if (tope < datos.length - 1) { //si tope es menor al tamaño de datos menos una posicion
+	            tope++; // tope incrementa 
+	            datos[tope] = letra;// y en la posicion donde este tope, se guardara la letra ingresada 
+	        }
+	    }
 	
 }
 //====================CLASE JUEGO AHORCADO=================
