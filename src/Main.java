@@ -1,6 +1,10 @@
 import java.util.Scanner;
-
-
+//============Clase almacenamientoPila==============
+class AlmacenamientoPila{
+	 private char[] datos;
+	    private int tope;
+	
+}
 //====================CLASE JUEGO AHORCADO=================
 class JuegoAhorcado{
 	public String [] cargarPalabras (String cadena ){
@@ -51,7 +55,7 @@ class PruebaJuegoAhorcado{
 			break;
 			case "5":
 				System.out.println("Saliendo del menu.....");
-				return; //hasta aqui llegaste 
+				return; 
 				default:
 					System.out.println("Ese caracter no es valido");
 					break;
