@@ -188,7 +188,7 @@ class JuegoAhorcado{
         System.out.println("================================");
 
         System.out.println("Estoy pensando en una palabra de "
-                + palabraSecreta.length() + " letras.");
+                + palabraSecreta.length() + " letras");
 
         System.out.println();
 
@@ -216,7 +216,7 @@ class JuegoAhorcado{
             // Verificar que solo se ingrese una letra
             if (entrada.length() != 1) {
 
-                System.out.println("Debes ingresar solamente una letra.");
+                System.out.println("Debes ingresar solamente una letra");
                 continue;
             }
 
@@ -327,14 +327,15 @@ class PruebaJuegoAhorcado{
 
 //=========CLASE OPORTUNIDADES==========
 class Oportunidades{
-	  private int intentos;
-	    private int errores;
+	
+	private int intentos;
+	private int errores;
 
-	    // Constructor
-	    public Oportunidades() {
-	        intentos = 10;
-	        errores = 0;
-	    }
+	// Constructor
+	public Oportunidades() {
+	   intentos = 10;
+	   errores = 0;
+	}
 
 	    // Descontar una oportunidad
 	    public void descontarIntento() {
@@ -360,7 +361,22 @@ class Oportunidades{
 }
 
 class Jugador{
-	
+	public void bienvenida() {
+		System.out.println("=======REGLAS DEL JUEGO========");
+		System.out.println("1.Tienes solo 8 oportunidades para adivinar la palabra, pierdes\r\n"
+				+ "una oportunidad de adivinar solo cuando ha ingresado una letra\r\n"
+				+ "que NO está en la palabra secreta. ");
+		System.out.println();
+		System.out.println("2.Solo se puede ingresar una letra a la vez (A-Z). ");
+		System.out.println("Tendras que adivinar una palabra aleatoria ");
+		System.out.println();
+		System.out.println("3.El juego terminara cuando adivines la palabra completa\r\n"
+				+ "en el número de oportunidades indicado (o menos).");
+		System.out.println();
+		System.out.println("4.Si el número de oportunidades de adivinar se termina,\r\n"
+				+ "PIERDES y se  te deberá revelar la palabra secreta.");
+		System.out.println();
+	}
 }
 	
 
