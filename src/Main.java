@@ -146,6 +146,33 @@ class JuegoAhorcado{
 
         return true;
     }
+    
+    // Obtener letras disponibles
+    public String obtenerLetrasDisponibles(char[] letrasIngresadas) {
+
+        String abecedario = "abcdefghijklmnñopqrstuvwxyz";
+        String disponibles = "";
+
+        for (int i = 0; i < abecedario.length(); i++) {
+
+            char letra = abecedario.charAt(i);
+
+            boolean usada = false;
+
+            for (int j = 0; j < letrasIngresadas.length; j++) {
+
+                if (letrasIngresadas[j] == letra) {
+                    usada = true;
+                }
+            }
+
+            if (!usada) {
+                disponibles += letra;
+            }
+        }
+
+        return disponibles;
+    }
 }
 
 
