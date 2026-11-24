@@ -358,6 +358,10 @@ class Oportunidades{
 	    }
 	
 }
+
+class Jugador{
+	
+}
 	
 
 public class Main {
