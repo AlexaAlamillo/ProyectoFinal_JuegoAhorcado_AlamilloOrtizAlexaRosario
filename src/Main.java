@@ -122,9 +122,30 @@ class JuegoAhorcado{
         return resultado;
 	}
 	
-	public void inicioAhorcado() {
-		
-	}
+	 // Verificar si se adivino la palabra
+    public boolean seAdivinoLaPalabra(
+            String palabraSecreta, char[] letrasIngresadas) {
+
+        for (int i = 0; i < palabraSecreta.length(); i++) {
+
+            char letra = palabraSecreta.charAt(i);
+
+            boolean encontrada = false;
+
+            for (int j = 0; j < letrasIngresadas.length; j++) {
+
+                if (letrasIngresadas[j] == letra) {
+                    encontrada = true;
+                }
+            }
+
+            if (!encontrada) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
 
@@ -195,7 +216,8 @@ class Oportunidades{
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		PruebaJuegoAhorcado  pja = new PruebaJuegoAhorcado();
+		pja.menuOpciones();
 
 	}
 
