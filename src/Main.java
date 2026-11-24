@@ -173,6 +173,108 @@ class JuegoAhorcado{
 
         return disponibles;
     }
+    
+    public void inicioAhorcado(String palabra, Scanner sc) {
+
+        palabraSecreta = palabra.toUpperCase();
+
+        // Reiniciar estructuras para una nueva partida
+        letrasIngresadas = new AlmacenamientoPila();
+        oportunidades = new Oportunidades();
+
+        System.out.println();
+        System.out.println("================================");
+        System.out.println("      JUEGO DEL AHORCADO");
+        System.out.println("================================");
+
+        System.out.println("Estoy pensando en una palabra de "
+                + palabraSecreta.length() + " letras.");
+
+        System.out.println();
+
+        // Mientras queden oportunidades
+        while (oportunidades.quedanOportunidades()) {
+
+            char[] letras = letrasIngresadas.obtenerLetras();
+
+            System.out.println("--------------------------------");
+
+            System.out.println("Te quedan "
+                    + oportunidades.getIntentos()
+                    + " oportunidades.");
+
+            System.out.println("Palabra: "
+                    + obtenerPalabraEncontrada(palabraSecreta, letras));
+
+            System.out.println("Letras disponibles: "
+                    + obtenerLetrasDisponibles(letras));
+
+            System.out.print("Ingresa una letra: ");
+
+            String entrada = sc.nextLine().trim().toLowerCase();
+
+            // Verificar que solo se ingrese una letra
+            if (entrada.length() != 1) {
+
+                System.out.println("Debes ingresar solamente una letra.");
+                continue;
+            }
+
+            char letra = entrada.charAt(0);
+
+            // Verificar que sea una letra del alfabeto español
+            String abecedario = "abcdefghijklmnñopqrstuvwxyz";
+
+            if (abecedario.indexOf(letra) == -1) {
+
+                System.out.println("Caracter no valido. Ingresa una letra.");
+                continue;
+            }
+
+            // Verificar si la letra ya fue ingresada
+            if (letrasIngresadas.BuscarLetra(letra)) {
+
+                System.out.println("Ya habias ingresado esa letra.");
+                continue;
+            }
+
+            // Guardar letra en la pila
+            letrasIngresadas.agregarLetra(letra);
+
+            // Verificar si la letra existe
+            if (palabraSecreta.indexOf(letra) >= 0) {
+
+                System.out.println("Bien hecho, la letra si esta.");
+
+            } else {
+
+                System.out.println("Esa letra no esta en la palabra.");
+
+                oportunidades.descontarIntento();
+            }
+
+            // Mostrar progreso
+            letras = letrasIngresadas.obtenerLetras();
+
+            System.out.println("Palabra: "
+                    + obtenerPalabraEncontrada(palabraSecreta, letras));
+
+            // Verificar si gano
+            if (seAdivinoLaPalabra(palabraSecreta, letras)) {
+
+                System.out.println();
+                System.out.println("Felicidades, GANASTE!");
+                System.out.println("La palabra era: " + palabraSecreta);
+                return;
+            }
+        }
+
+        // Si se terminan las oportunidades
+        System.out.println();
+        System.out.println("Te quedaste sin oportunidades.");
+        System.out.println("NO ADIVINASTE LA PALABRA.");
+        System.out.println("La palabra secreta era: " + palabraSecreta);
+    }
 }
 
 
