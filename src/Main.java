@@ -327,17 +327,35 @@ class PruebaJuegoAhorcado{
 
 //=========CLASE OPORTUNIDADES==========
 class Oportunidades{
-	private byte intentos = 8;
-	
-    public void descontarIntento() {
+	  private int intentos;
+	    private int errores;
 
-        intentos--;
-    }
+	    // Constructor
+	    public Oportunidades() {
+	        intentos = 10;
+	        errores = 0;
+	    }
 
-    public byte getIntentos() {
+	    // Descontar una oportunidad
+	    public void descontarIntento() {
+	        intentos--;
+	        errores++;
+	    }
 
-        return intentos;
-    }
+	    // Obtener los intentos restantes
+	    public int getIntentos() {
+	        return intentos;
+	    }
+
+	    // Obtener errores cometidos
+	    public int getErrores() {
+	        return errores;
+	    }
+
+	    // Verificar si quedan intentos
+	    public boolean quedanOportunidades() {
+	        return intentos > 0;
+	    }
 	
 }
 	
