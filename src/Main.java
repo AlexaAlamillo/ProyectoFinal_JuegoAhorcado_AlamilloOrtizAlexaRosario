@@ -188,8 +188,7 @@ class JuegoAhorcado{
         System.out.println("      JUEGO DEL AHORCADO");
         System.out.println("================================");
 
-        System.out.println("Estoy pensando en una palabra de "
-                + palabraSecreta.length() + " letras");
+        System.out.println("Estoy pensando en una palabra de "+ palabraSecreta.length() + " letras");
 
         System.out.println();
 
@@ -200,25 +199,21 @@ class JuegoAhorcado{
 
             System.out.println("--------------------------------");
 
-            System.out.println("Te quedan "
-                    + oportunidades.getIntentos()
-                    + " oportunidades.");
+            System.out.println("Te quedan " + oportunidades.getIntentos()+ " oportunidades.");
 
-            System.out.println("Palabra: "
-                    + obtenerPalabraEncontrada(palabraSecreta, letras));
+            System.out.println("Palabra: " + obtenerPalabraEncontrada(palabraSecreta, letras));
 
-            System.out.println("Letras disponibles: "
-                    + obtenerLetrasDisponibles(letras));
+            System.out.println("Letras disponibles: " + obtenerLetrasDisponibles(letras));
 
             System.out.print("Ingresa una letra: ");
 
-            String entrada = sc.nextLine().trim().toLowerCase();
+            String entrada = sc.nextLine().toLowerCase();
 
-            // Verificar que solo se ingrese una letra
+            // Verificar que el usuario solo ingrese  letras
             if (entrada.length() != 1) {
 
                 System.out.println("Debes ingresar solamente una letra");
-                continue;
+                continue;// para que siga ejecutando el codigo sin parar 
             }
 
             char letra = entrada.charAt(0);
@@ -226,7 +221,7 @@ class JuegoAhorcado{
             // Verificar que sea una letra del alfabeto español
             String abecedario = "abcdefghijklmnñopqrstuvwxyz";
 
-            if (abecedario.indexOf(letra) == -1) {
+            if (abecedario.indexOf(letra) == -1) {//Con esto nos podemos asegurar que no ocurra un error por agregar un numero
 
                 System.out.println("Caracter no valido. Ingresa una letra.");
                 continue;
@@ -257,8 +252,7 @@ class JuegoAhorcado{
             // Mostrar progreso
             letras = letrasIngresadas.obtenerLetras();
 
-            System.out.println("Palabra: "
-                    + obtenerPalabraEncontrada(palabraSecreta, letras));
+            System.out.println("Palabra: " + obtenerPalabraEncontrada(palabraSecreta, letras));
 
             // Verificar si gano
             if (seAdivinoLaPalabra(palabraSecreta, letras)) {
@@ -272,7 +266,7 @@ class JuegoAhorcado{
 
         // Si se terminan las oportunidades
         System.out.println();
-        System.out.println("Te quedaste sin oportunidades.");
+        System.out.println("===========Te quedaste sin oportunidades ===========");
         System.out.println("NO ADIVINASTE LA PALABRA.");
         System.out.println("La palabra secreta era: " + palabraSecreta);
     }
@@ -281,14 +275,15 @@ class JuegoAhorcado{
 
 //=================CLASE PRUEBA JUEGO AHORCADO==========
 class PruebaJuegoAhorcado{
-	 private Scanner sc;
+	
 	    private ArchivoPalabras archivo;
 	    private JuegoAhorcado juego;
 
+	    
+	   Scanner sc = new Scanner(System.in);
 	    // Constructor
 	    public PruebaJuegoAhorcado() {
 
-	        sc = new Scanner(System.in);
 	        archivo = new ArchivoPalabras();
 	        juego = new JuegoAhorcado();
 	    }
@@ -347,8 +342,8 @@ class PruebaJuegoAhorcado{
 
 	        } while (!opcion.equals("5"));
 	    }
-
-	    // Opcion 1: verificar archivo
+	    
+	    
 	    public void verificarArchivo() {
 
 	        archivo.verificarArchivo();
@@ -573,8 +568,7 @@ class ArchivoPalabras {
         // Contar palabras
         try {
 
-            BufferedReader br = new BufferedReader(
-                    new FileReader(ruta));
+            BufferedReader br = new BufferedReader(new FileReader(ruta));
 
             String linea;
 
@@ -745,10 +739,10 @@ class ArchivoPalabras {
             pw.close();
             fw.close();
 
-            System.out.println("Archivo vaciado correctamente.");
+            System.out.println("Archivo vaciado correctamente");
 
         } catch (IOException e) {
-            System.out.println("Error al vaciar el archivo.");
+            System.out.println("Error al vaciar el archivo");
         }
     }
 }
