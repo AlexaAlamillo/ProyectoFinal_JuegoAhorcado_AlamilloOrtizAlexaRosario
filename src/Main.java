@@ -558,10 +558,10 @@ class ArchivoPalabras {
                 archivo.createNewFile();
             }
 
-            System.out.println("Archivo verificado correctamente.");
+            System.out.println("Archivo verificado correctamente");
 
         } catch (IOException e) {
-            System.out.println("Error al crear el archivo.");
+            System.out.println("Error al crear el archivo");
         }
     }
 
