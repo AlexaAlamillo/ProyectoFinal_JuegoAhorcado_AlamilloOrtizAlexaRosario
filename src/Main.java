@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.io.*;
 import java.util.Scanner;
 //============Clase almacenamientoPila==============
 class AlmacenamientoPila{
@@ -176,7 +177,7 @@ class JuegoAhorcado{
     
     public void inicioAhorcado(String palabra, Scanner sc) {
 
-        palabraSecreta = palabra.toUpperCase();
+        palabraSecreta = palabra.toLowerCase();
 
         // Reiniciar estructuras para una nueva partida
         letrasIngresadas = new AlmacenamientoPila();
@@ -280,48 +281,222 @@ class JuegoAhorcado{
 
 //=================CLASE PRUEBA JUEGO AHORCADO==========
 class PruebaJuegoAhorcado{
-	public void menuOpciones() {
-		Scanner sc = new Scanner (System.in);
+	 private Scanner sc;
+	    private ArchivoPalabras archivo;
+	    private JuegoAhorcado juego;
 
-		String opcion;
-		do {
-			
-			System.out.println("======MENU DEL JUEGO====");
-			System.out.println("1) Verificar Archivo");
-			System.out.println("2) Llenar Archivo con Palabras");
-			System.out.println("3) Borrar Archivo");
-			System.out.println("4) Jugar");
-			System.out.println("----------------------------------");
-			System.out.println("5) Salir");
-			System.out.println("Ingrese opcion:");
-		    opcion = sc.next();
-			switch(opcion) {
-			case "1":
-				
-				break;
-			case "2":
-				
-				break;
-			case "3":
-				
-				break;
-			case "4":
-			
-				
+	    // Constructor
+	    public PruebaJuegoAhorcado() {
 
-			break;
-			case "5":
-				System.out.println("Saliendo del menu.....");
-				return; 
-				default:
-					System.out.println("Ese caracter no es valido");
-					break;
-					
-			}
-			
-		}while (opcion != "5");
-	
-	}
+	        sc = new Scanner(System.in);
+	        archivo = new ArchivoPalabras();
+	        juego = new JuegoAhorcado();
+	    }
+
+	    // Menu principal
+	    public void menuOpciones() {
+
+	        String opcion;
+
+	        do {
+
+	            System.out.println();
+	            System.out.println("======= MENU DEL AHORCADO =======");
+	            System.out.println("1) Verificar archivo");
+	            System.out.println("2) Llenar archivo con palabras");
+	            System.out.println("3) Borrar archivo");
+	            System.out.println("4) Jugar");
+	            System.out.println("5) Salir");
+	            System.out.println("================================");
+	            System.out.print("Ingrese opcion: ");
+
+	            opcion = sc.nextLine();
+
+	            switch (opcion) {
+
+	                case "1":
+
+	                    verificarArchivo();
+	                    break;
+
+	                case "2":
+
+	                    llenarArchivo();
+	                    break;
+
+	                case "3":
+
+	                    borrarArchivo();
+	                    break;
+
+	                case "4":
+
+	                    jugar();
+	                    break;
+
+	                case "5":
+
+	                    System.out.println("Saliendo del juego...");
+	                    break;
+
+	                default:
+
+	                    System.out.println("Opcion no valida.");
+	                    break;
+	            }
+
+	        } while (!opcion.equals("5"));
+	    }
+
+	    // Opcion 1: verificar archivo
+	    public void verificarArchivo() {
+
+	        archivo.verificarArchivo();
+
+	        String[] palabras = archivo.leerPalabras();
+
+	        System.out.println("Cantidad de palabras: " + palabras.length);
+
+	        if (palabras.length == 0) {
+	            System.out.println("El archivo esta vacio.");
+	        } else {
+
+	            System.out.println("Palabras registradas:");
+
+	            for (int i = 0; i < palabras.length; i++) {
+	                System.out.println((i + 1) + ". " + palabras[i]);
+	            }
+	        }
+	    }
+
+	    // Opcion 2: llenar archivo
+	    public void llenarArchivo() {
+
+	        archivo.verificarArchivo();
+
+	        System.out.print("Cuantas palabras deseas agregar? ");
+
+	        String entrada = sc.nextLine();
+
+	        int cantidad;
+
+	        try {
+	            cantidad = Integer.parseInt(entrada);
+	        } catch (NumberFormatException e) {
+	            System.out.println("Debes ingresar un numero.");
+	            return;
+	        }
+
+	        if (cantidad <= 0) {
+	            System.out.println("La cantidad debe ser mayor que cero.");
+	            return;
+	        }
+
+	        for (int i = 0; i < cantidad; i++) {
+
+	            System.out.print("Ingresa la palabra " + (i + 1) + ": ");
+
+	            String palabra = sc.nextLine().trim();
+
+	            // Validar que la palabra solo tenga letras
+	            if (palabra.isEmpty()) {
+	                System.out.println("La palabra no puede estar vacia.");
+	                i--;
+	                continue;
+	            }
+
+	            boolean valida = true;
+
+	            for (int j = 0; j < palabra.length(); j++) {
+
+	                char letra = Character.toLowerCase(palabra.charAt(j));
+
+	                String abecedario = "abcdefghijklmnñopqrstuvwxyz";
+
+	                if (abecedario.indexOf(letra) == -1) {
+	                    valida = false;
+	                }
+	            }
+
+	            if (!valida) {
+	                System.out.println("Solo puedes ingresar palabras con letras.");
+	                i--;
+	                continue;
+	            }
+
+	            archivo.cargarPalabras(palabra);
+	        }
+
+	        System.out.println("Carga de palabras finalizada.");
+	    }
+
+	    // Opcion 3: vaciar archivo
+	    public void borrarArchivo() {
+
+	        System.out.print("Estas seguro de vaciar el archivo? (S/N): ");
+
+	        String respuesta = sc.nextLine();
+
+	        if (respuesta.equalsIgnoreCase("S")) {
+
+	            archivo.verificarArchivo();
+	            archivo.eliminarArchivo();
+
+	        } else {
+
+	            System.out.println("Operacion cancelada.");
+	        }
+	    }
+
+	    // Opcion 4: jugar
+	    public void jugar() {
+
+	        archivo.verificarArchivo();
+
+	        // Comprobar si existen palabras
+	        if (archivo.estaVacio()) {
+
+	            System.out.println("El archivo de palabras esta vacio.");
+	            System.out.println("Primero debes agregar palabras.");
+
+	            llenarArchivo();
+
+	            // Comprobar nuevamente
+	            if (archivo.estaVacio()) {
+	                System.out.println("No hay palabras para jugar.");
+	                return;
+	            }
+	        }
+
+	        // Leer palabras del archivo
+	        String[] palabras = archivo.leerPalabras();
+
+	        // Elegir palabra aleatoria
+	        String palabra = juego.elegirPalabras(palabras);
+
+	        if (palabra != null) {
+	            juego.inicioAhorcado(palabra, sc);
+	        }
+	    }
+
+	    // Metodo main
+	    public static void main(String[] args) {
+
+	        PruebaJuegoAhorcado prueba = new PruebaJuegoAhorcado();
+
+	        prueba.archivo.verificarArchivo();
+
+	        System.out.println("=================================");
+	        System.out.println("   JUEGO DEL AHORCADO EN JAVA");
+	        System.out.println("=================================");
+
+	       
+	        Jugador jugador = new Jugador();
+
+	        jugador.bienvenida();
+
+	        prueba.menuOpciones();
+	    }
 }
 
 
@@ -360,6 +535,226 @@ class Oportunidades{
 	
 }
 
+
+
+class ArchivoPalabras {
+
+    private String ruta = "./archivo/palabras.txt";
+
+    // Verificar y crear archivo
+    public void verificarArchivo() {
+
+        File carpeta = new File("./archivo");
+
+        if (!carpeta.exists()) {
+            carpeta.mkdir();
+        }
+
+        File archivo = new File(ruta);
+
+        try {
+
+            if (!archivo.exists()) {
+                archivo.createNewFile();
+            }
+
+            System.out.println("Archivo verificado correctamente.");
+
+        } catch (IOException e) {
+            System.out.println("Error al crear el archivo.");
+        }
+    }
+
+    // Leer las palabras del archivo
+    public String[] leerPalabras() {
+
+        int contador = 0;
+
+        // Contar palabras
+        try {
+
+            BufferedReader br = new BufferedReader(
+                    new FileReader(ruta));
+
+            String linea;
+
+            while ((linea = br.readLine()) != null) {
+
+                if (!linea.trim().isEmpty()) {
+                    contador++;
+                }
+            }
+
+            br.close();
+
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo.");
+        }
+
+        // Crear arreglo del tamaño exacto
+        String[] palabras = new String[contador];
+
+        int posicion = 0;
+
+        // Leer y guardar las palabras
+        try {
+
+            BufferedReader br = new BufferedReader(
+                    new FileReader(ruta));
+
+            String linea;
+
+            while ((linea = br.readLine()) != null) {
+
+                linea = linea.trim().toUpperCase();
+
+                if (!linea.isEmpty()) {
+                    palabras[posicion] = linea;
+                    posicion++;
+                }
+            }
+
+            br.close();
+
+        } catch (IOException e) {
+            System.out.println("Error al cargar las palabras.");
+        }
+
+        return palabras;
+    }
+
+    // Buscar palabra mediante busqueda secuencial
+    public boolean buscarPalabra(String palabra) {
+
+        String[] palabras = leerPalabras();
+
+        palabra = palabra.trim().toUpperCase();
+
+        for (int i = 0; i < palabras.length; i++) {
+
+            if (palabras[i].equals(palabra)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Agregar una palabra al archivo
+    public void cargarPalabras(String palabra) {
+
+        palabra = palabra.trim().toUpperCase();
+
+        if (palabra.isEmpty()) {
+            System.out.println("La palabra no puede estar vacia.");
+            return;
+        }
+
+        if (buscarPalabra(palabra)) {
+            System.out.println("La palabra ya existe.");
+            return;
+        }
+
+        try {
+
+            FileWriter fw = new FileWriter(ruta, true);
+            PrintWriter pw = new PrintWriter(fw);
+
+            pw.println(palabra);
+
+            pw.close();
+            fw.close();
+
+            // Ordenar despues de agregar
+            guardarOrdenadas();
+
+            System.out.println("Palabra guardada correctamente.");
+
+        } catch (IOException e) {
+            System.out.println("Error al guardar la palabra.");
+        }
+    }
+
+    // Ordenar palabras con burbuja
+    public void ordenarPalabras(String[] palabras) {
+
+        String auxiliar;
+
+        for (int i = 0; i < palabras.length - 1; i++) {
+
+            for (int j = 0; j < palabras.length - 1 - i; j++) {
+
+                if (palabras[j].compareTo(palabras[j + 1]) > 0) {
+
+                    auxiliar = palabras[j];
+                    palabras[j] = palabras[j + 1];
+                    palabras[j + 1] = auxiliar;
+                }
+            }
+        }
+    }
+
+    // Guardar palabras ordenadas
+    public void guardarOrdenadas() {
+
+        String[] palabras = leerPalabras();
+
+        ordenarPalabras(palabras);
+
+        try {
+
+            FileWriter fw = new FileWriter(ruta);
+            PrintWriter pw = new PrintWriter(fw);
+
+            for (int i = 0; i < palabras.length; i++) {
+                pw.println(palabras[i]);
+            }
+
+            pw.close();
+            fw.close();
+
+        } catch (IOException e) {
+            System.out.println("Error al ordenar el archivo.");
+        }
+    }
+
+    // Mostrar cantidad de palabras
+    public void verificarCantidad() {
+
+        String[] palabras = leerPalabras();
+
+        System.out.println("Palabras cargadas: " + palabras.length);
+    }
+
+    // Verificar si el archivo esta vacio
+    public boolean estaVacio() {
+
+        String[] palabras = leerPalabras();
+
+        return palabras.length == 0;
+    }
+
+    // Vaciar archivo
+    public void eliminarArchivo() {
+
+        try {
+
+            FileWriter fw = new FileWriter(ruta);
+            PrintWriter pw = new PrintWriter(fw);
+
+            pw.close();
+            fw.close();
+
+            System.out.println("Archivo vaciado correctamente.");
+
+        } catch (IOException e) {
+            System.out.println("Error al vaciar el archivo.");
+        }
+    }
+}
+
+
+//========================Clase Jugador=========================
 class Jugador{
 	public void bienvenida() {
 		System.out.println("=======REGLAS DEL JUEGO========");
@@ -383,6 +778,8 @@ class Jugador{
 public class Main {
 
 	public static void main(String[] args) {
+		Jugador j = new Jugador();
+		j.bienvenida();
 		PruebaJuegoAhorcado  pja = new PruebaJuegoAhorcado();
 		pja.menuOpciones();
 
